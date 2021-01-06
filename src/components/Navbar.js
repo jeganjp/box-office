@@ -10,7 +10,7 @@ const Navbar = () => {
             <ul style={{display:'flex'}}>
                {
                    Links.map(item=>(
-                       <li style={{marginLeft:20,marginRight:20}}><Link to={item.to}>{item.text}</Link></li>
+                       <li key={item.to} style={{marginLeft:20,marginRight:20}}><Link to={item.to}>{item.text}</Link></li>
                    )
 
                    )
