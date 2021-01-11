@@ -6,7 +6,7 @@ const ShowCard = ({id,image,summary,name}) => {
     const summaryAsText=summary?`${summary.split(' ').slice(0, 10).join(' ').replace(/<.+?>/g, '')}...`:'No description';
     return (
         <StyledShowCard>
-            <div className='imgae-wrapper'>
+            <div className='img-wrapper'>
                 <img src={image} alt="show poster"/>
             </div>
             <h1>{name}</h1>

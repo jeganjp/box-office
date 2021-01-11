@@ -2,6 +2,7 @@ import React from 'react';
 import {Switch,Route} from 'react-router-dom';
 import Home from './pages/Home';
 import Info from './pages/Info';
+import ShowPage from './pages/ShowPage';
 
 function App() {
   return (
@@ -12,6 +13,9 @@ function App() {
       </Route>
       <Route exact path="/info">
         <Info />
+      </Route>
+      <Route exact path="/show/:id">
+        <ShowPage />
       </Route>
       <Route>
         <div>
