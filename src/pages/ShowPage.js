@@ -1,6 +1,11 @@
 import React,{useEffect,useReducer} from 'react';
 import {useParams} from 'react-router-dom';
 import {get_api} from '../misc/config';
+// import NOT_FOUND_IMG from '../images/not-found.png';
+import ShowMainData from '../components/shows/ShowMainData';
+import ShowDetails from '../components/shows/ShowDetails';
+import ShowSeasons from '../components/shows/ShowSeasons';
+import ShowCast from '../components/shows/ShowCast';
 const ShowPage = () => {
     const {id} =useParams();
     // const [show,setShow]= useState(null);
@@ -27,7 +32,7 @@ const ShowPage = () => {
 
     useEffect(()=>{
         let isMounted =true;
-        get_api(`shows/1?embed[]=seasons&embed[]=cast`).then(results =>
+        get_api(`shows/${id}?embed[]=seasons&embed[]=cast`).then(results =>
         {
             if(isMounted){
                 dispatch({type:'FETCH_SUCCESS',show:results})
@@ -49,10 +54,19 @@ const ShowPage = () => {
     {
         return (<div>Error is : {error}</div>)
     }
+    // const image=<img src='show.image.medium' alt='display poster'></img>
+    // console.log(show.image.medium)
     return (
         <div>
-            this is show pages
-        </div>
+        <ShowMainData image={show.image} name={show.name} rating={show.rating} geners={show.genres} summary={show.summary}/>
+        <div><h3>Details</h3>
+        <ShowDetails lang={show.language}  runtime={show.runtime} premiered={show.premiered} network={show.network} status={show.status}
+         /></div>
+        <div><h3>Seasons</h3>
+        <ShowSeasons seasons={show._embedded.seasons}/></div>
+        <div><h3>Cast</h3>
+        <ShowCast cast={show._embedded.cast}/></div>
+         </div>
     )
 }
 
