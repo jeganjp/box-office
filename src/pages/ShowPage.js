@@ -6,6 +6,8 @@ import ShowMainData from '../components/shows/ShowMainData';
 import ShowDetails from '../components/shows/ShowDetails';
 import ShowSeasons from '../components/shows/ShowSeasons';
 import ShowCast from '../components/shows/ShowCast';
+import {ShowPageWrapper} from './Show.styled';
+import { InfoBlock } from './Show.styled';
 const ShowPage = () => {
     const {id} =useParams();
     // const [show,setShow]= useState(null);
@@ -57,16 +59,22 @@ const ShowPage = () => {
     // const image=<img src='show.image.medium' alt='display poster'></img>
     // console.log(show.image.medium)
     return (
-        <div>
+        <ShowPageWrapper>
         <ShowMainData image={show.image} name={show.name} rating={show.rating} geners={show.genres} summary={show.summary}/>
-        <div><h3>Details</h3>
+        <InfoBlock>
+        <h3>Details</h3>
         <ShowDetails lang={show.language}  runtime={show.runtime} premiered={show.premiered} network={show.network} status={show.status}
-         /></div>
-        <div><h3>Seasons</h3>
-        <ShowSeasons seasons={show._embedded.seasons}/></div>
-        <div><h3>Cast</h3>
-        <ShowCast cast={show._embedded.cast}/></div>
-         </div>
+         />
+        </InfoBlock>
+        <InfoBlock>
+        <h3>Seasons</h3>
+        <ShowSeasons seasons={show._embedded.seasons}/>
+        </InfoBlock>
+        <InfoBlock>
+        <h3>Cast</h3>
+        <ShowCast cast={show._embedded.cast}/>
+        </InfoBlock>
+         </ShowPageWrapper>
     )
 }
 

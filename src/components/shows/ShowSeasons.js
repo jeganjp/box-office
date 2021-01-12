@@ -1,22 +1,23 @@
-import React from 'react'
+import React from 'react';
+import { SeasonList, SeasonsWrapper } from './Seasons.styled';
 
 const ShowSeasons = ({seasons}) => {
     return (
-        <div>
+        <SeasonsWrapper>
             <div><p>Total Seasons: {seasons.length}</p></div>
-            <div>{seasons.map((season)=>(
-                <div key={season.id}>
-                    <p>Season : {season.number}</p>
+            <SeasonList>{seasons.map((season)=>(
+                <div key={season.id} className="season-item">
+                    <p className="left">Season : {season.number}</p>
                     <p>
         Episodes in total:{' '}
         <span>
           {seasons.reduce((acc, season) => acc + season.episodeOrder, 0)}
         </span>
       </p>
-                    <p>Aired : {season.premiereDate} - {season.endDate} </p>
+                    <p className="right">Aired : {season.premiereDate} - {season.endDate} </p>
                 </div>
-            ))}</div>
-        </div>
+            ))}</SeasonList>
+        </SeasonsWrapper>
     )
 }
 
