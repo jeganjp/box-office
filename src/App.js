@@ -1,7 +1,7 @@
 import React from 'react';
 import {Switch,Route} from 'react-router-dom';
 import Home from './pages/Home';
-import Info from './pages/Info';
+import Starred from './pages/Starred';
 import ShowPage from './pages/ShowPage';
 
 function App() {
@@ -11,8 +11,8 @@ function App() {
       <Route exact path="/">
         <Home />
       </Route>
-      <Route exact path="/info">
-        <Info />
+      <Route exact path="/starred">
+        <Starred />
       </Route>
       <Route exact path="/show/:id">
         <ShowPage />
