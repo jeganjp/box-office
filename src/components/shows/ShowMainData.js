@@ -7,9 +7,9 @@ const ShowMainData = ({image,name,rating,summary,geners}) => {
         {<img src={image?image.medium:IMAGE_NOT_FOUND} alt='poster' />}
         <div className='text-side'>
         <Headline><h2>{name}</h2>
-        <div>
-        <Star />
-        <span>{rating.average || 'N/A'}</span>
+        <div style={{margin:20}}>
+        <Star active/>
+        <span > {rating.average || 'N/A'}</span>
         </div>
         </Headline>
         <div className='summary' dangerouslySetInnerHTML={{__html:summary} }/>
