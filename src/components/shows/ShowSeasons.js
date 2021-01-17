@@ -12,7 +12,7 @@ const ShowSeasons = ({seasons}) => {
         <span> 
           {seasons.reduce((acc, season) => acc + season.episodeOrder, 0)}
         </span>
-        </p>
+        </p>    
       </p>
                     <p className="right">Aired : {season.premiereDate} - {season.endDate} </p>
                 </div>
