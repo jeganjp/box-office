@@ -1,42 +1,13 @@
-import React,{useState} from 'react';
+import React,{useState,useCallback} from 'react';
 import ActorGrid from '../components/actors/ActorGrid';
 import CustomRadio from '../components/CustomRadio';
 import MainPageLayout from '../components/MainPageLayout';
 import ShowGrid from '../components/shows/ShowGrid';
 import {get_api} from '../misc/config';
-import { useLastQuery } from '../misc/custom-hooks';
+import { useLastQuery} from '../misc/custom-hooks';
 import { RadioInputsWrapper, SearchButtonWrapper, SearchInput } from './Home.styled';
 
-const Home = () => {
-    const [input,setInput]=useLastQuery();
-    const [result,setResult]=useState(null);
-    const [searchOption,setSearchOption]=useState('shows');
-    const searchcheck = searchOption==='shows';
-
-    const onInputChange=(ev)=>{
-        //console.log(ev.target.value);
-        setInput(ev.target.value);
-    }
-
-    const onDownPress=(ev)=>{
-        if(ev.keyCode===13)
-        {
-            onSearch();
-        }
-    }
-
-    const onSearch=()=>
-    {
-        get_api(`search/${searchOption}?q=${input}`).then(result=>{setResult(result);console.log(result)});
-    }
-
-    const radioButtonChange=(ev)=>
-    {
-        setSearchOption(ev.target.value);
-        console.log(ev.target.value);
-    }
-
-    const renderResults=()=>
+const renderResults=(result)=>
     {
         if(result && result.length===0)
         {
@@ -46,14 +17,38 @@ const Home = () => {
         {
            return result[0].show?<ShowGrid data={result}/>:<ActorGrid data={result} />
         }
-        // if(result && result.length>0 && searchOption==='people')
-        // {
-        //   return <div>{result.map((item)=><div key={item.person.id}>{item.person.name}
-        //   {/* <div style={{marginRight:10}}><img src={item.person.image.medium} alt='show poster'/></div> */}
-        //   </div>)}</div>
-        // }
         return null;
     }
+
+const Home = () => {
+    const [input,setInput]=useLastQuery();
+    const [result,setResult]=useState(null);
+    const [searchOption,setSearchOption]=useState('shows');
+    const searchcheck = searchOption==='shows';
+
+    
+    const onInputChange=useCallback((ev)=>{
+        //console.log(ev.target.value);
+        setInput(ev.target.value);
+    },[setInput])
+
+    const onDownPress=(ev)=>{
+        if(ev.keyCode===13)
+        {
+            onSearch();
+        }
+    }
+    
+    const onSearch=()=>
+    {
+        get_api(`search/${searchOption}?q=${input}`).then(result=>{setResult(result);console.log(result)});
+    }
+
+    const radioButtonChange=useCallback((ev)=>
+    {
+        setSearchOption(ev.target.value);
+    },[]);
+
 
     return (
         <MainPageLayout>
@@ -79,7 +74,7 @@ const Home = () => {
             <SearchButtonWrapper>
             <button type='button' onClick={onSearch}>Search</button>
             </SearchButtonWrapper>
-            {renderResults()}
+            {renderResults(result)}
         </MainPageLayout>
     )
 }

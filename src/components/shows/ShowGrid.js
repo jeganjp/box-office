@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useCallback} from 'react';
 import NOT_FOUND_IMAGE from '../../images/not-found.png'
 import { FlexGrid } from '../styled';
 import ShowCard from './ShowCard';
@@ -10,7 +10,7 @@ export const ShowGrid = ({data}) => {
             data.map(({show})=>{
                 const isStarred = starredShows.includes(show.id);
                 
-                const onStarClick=()=>
+                const onStarClick=useCallBack(()=>
                 {
                     if(isStarred)
                     {
@@ -20,7 +20,7 @@ export const ShowGrid = ({data}) => {
                         dispatchStarred({type:'ADD',showId:show.id});
                     }
 
-                }
+                },[show.id,isStarred])
                 return(<ShowCard key={show.id} 
                     id={show.id} 
                     name={show.name} 
