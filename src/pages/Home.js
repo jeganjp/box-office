@@ -6,7 +6,6 @@ import ShowGrid from '../components/shows/ShowGrid';
 import {get_api} from '../misc/config';
 import { useLastQuery } from '../misc/custom-hooks';
 import { RadioInputsWrapper, SearchButtonWrapper, SearchInput } from './Home.styled';
-import FadeIn from 'react-fade-in';
 
 const Home = () => {
     const [input,setInput]=useLastQuery();
@@ -80,9 +79,7 @@ const Home = () => {
             <SearchButtonWrapper>
             <button type='button' onClick={onSearch}>Search</button>
             </SearchButtonWrapper>
-            <FadeIn>
             {renderResults()}
-            </FadeIn>
         </MainPageLayout>
     )
 }

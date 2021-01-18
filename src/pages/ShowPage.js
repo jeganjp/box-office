@@ -11,9 +11,6 @@ import { InfoBlock } from './Show.styled';
 import { useShow } from '../misc/custom-hooks';
 const ShowPage = () => {
     const {id} =useParams();
-    // const [show,setShow]= useState(null);
-    // const [isLoading,setIsLoading]=useState(true);
-    // const [error,setError]=useState(null);
 
     const {show,isLoading,error}=useShow(id);
     
@@ -26,8 +23,6 @@ const ShowPage = () => {
     {
         return (<div>Error is : {error}</div>)
     }
-    // const image=<img src='show.image.medium' alt='display poster'></img>
-    // console.log(show.image.medium)
     return (
         <ShowPageWrapper>
         <ShowMainData image={show.image} name={show.name} rating={show.rating} geners={show.genres} summary={show.summary}/>
